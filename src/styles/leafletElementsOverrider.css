@@ -1,0 +1,10 @@
+.tooltip{
+    /* background-color: transparent !important; */
+    color: #3f3f3f;
+    font-weight: 500;
+    border: none;
+}
+
+.tooltip::after, .tooltip::before{
+    opacity: 1;
+}
