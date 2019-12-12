@@ -73,6 +73,7 @@ const ActionDescription = styled.span`
     left: 50%;
     transform: translateX(-50%);
     transition: 300ms;
+    z-index: 1000000000000;
 `;
 
 const Image = styled.img`
@@ -89,7 +90,7 @@ const Image = styled.img`
 `;
 
 const Option = styled.span`
-    width: calc(100% - 10px);
+    width: 100%;
     height: 40px;
     display: flex;
     flex-direction: column;

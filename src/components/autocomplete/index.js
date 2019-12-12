@@ -18,7 +18,6 @@ const AutoComplete = (props) => {
 
     const [matches, setMatches] = useState([]);
     const [matchesIterator, setMatchesIterator] = useState(0);
-
     const [hoverSearch, setHoverSearch] = useState(false);
     const [hoverRemoveFilter, setHoverRemoverFilter] = useState(false);
 
@@ -115,9 +114,10 @@ const AutoComplete = (props) => {
                     autoComplete='off'
                     autoCorrect='off'
                     spellCheck='false'
+                    
                 />
                 <AutoCompleteAction
-                    onClick={() => handleInputAction('search')}
+                    onClick={() => matches.length > 0 ? handleInputAction('search') : null}
                     onMouseOver={() => setHoverSearch(true)}
                     onMouseOut={() => setHoverSearch(false)}
                 >
