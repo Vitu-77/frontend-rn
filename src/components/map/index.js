@@ -51,12 +51,11 @@ const Map = () => {
     }));
 
     const [map, setMap] = useState();
-    const [county, setCounty] = useState();
     const [error, setError] = useState(false);
     const [filteredLayerID, setFilteredLayerID] = useState();
     const [closeSuggestions, setCloseSuggestions] = useState(false);
-
     const [layerGroup] = useState(L.layerGroup([defaultLayer, tileLayer]));
+    const [isFilterng, setIsFiltering] = useState(false);
 
     useEffect(() => {
         setMap(L.map('map', {
@@ -70,7 +69,20 @@ const Map = () => {
         }));
     }, [layerGroup]);
 
-    const filter = (countyName) => {
+    const isCountyNameValid = (county) => {
+        if (county) {
+            const countiesWithoutAcentuation = [];
+            const countyWithoutAcentuation = ignoreAcentuation(county.toUpperCase());
+
+            for (let county of counties) {
+                countiesWithoutAcentuation.push(ignoreAcentuation(county));
+            }
+
+            return countiesWithoutAcentuation.includes(countyWithoutAcentuation.toUpperCase());
+        }
+    }
+
+    const handleFilter = (countyName) => {
         if (!isCountyNameValid(countyName)) {
             setError(true);
 
@@ -78,6 +90,8 @@ const Map = () => {
                 setError(false);
             }, 3000)
         }
+
+        setIsFiltering(true);
 
         const filteredLayer = L.geoJSON(geoJSON, {
             style: filteredDefaultStyle,
@@ -113,8 +127,11 @@ const Map = () => {
         map.fitBounds(bounds, { duration: .35 });
     }
 
-    const removeFilter = () => {
+    const handleRemoveFilter = () => {
         if (layerGroup.hasLayer(filteredLayerID)) {
+
+            setIsFiltering(false);
+
             layerGroup.clearLayers();
             layerGroup.addLayer(tileLayer);
             layerGroup.addLayer(defaultLayer);
@@ -124,19 +141,6 @@ const Map = () => {
             map.flyToBounds([[-3.492533, -39.956314], [-8.251142, -32.545212]], {
                 duration: .35
             });
-        }
-    }
-
-    const isCountyNameValid = (county) => {
-        if (county) {
-            const countiesWithoutAcentuation = [];
-            const countyWithoutAcentuation = ignoreAcentuation(county.toUpperCase());
-
-            for (let county of counties) {
-                countiesWithoutAcentuation.push(ignoreAcentuation(county));
-            }
-
-            return countiesWithoutAcentuation.includes(countyWithoutAcentuation.toUpperCase());
         }
     }
 
@@ -154,15 +158,13 @@ const Map = () => {
     }
 
     return (
-        <React.Fragment>
-            <button onClick={() => filter(county)}>FILTER</button>
-            <button onClick={removeFilter}>REMOVE FILTER</button>
-
+        <React.Fragment>           
             <AutoComplete
+                placeholder='Buscar município'
                 options={counties}
-                modifyState={setCounty}
-                filter={filter}
-                placeholder='Pesquisar município'
+                filter={handleFilter}
+                removeFilter={handleRemoveFilter}
+                isFilterng={isFilterng}
                 closeSuggestions={closeSuggestions}
             />
             <ErrorMessage error={error}>Município não encontrado</ErrorMessage>

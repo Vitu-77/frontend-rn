@@ -2,50 +2,112 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     position: absolute;
-    width: 400px;
-    top: 8%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
+
     z-index: 10000 !important;
 `;
 
-const Input = styled.input`
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 8px;
+const Header = styled.header`
+    width: 500px;
     background: #fff;
-    border: 2px solid #dedede;
-    padding: 14px 12px;
-    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: ${props => props.roundBottom === 0 ? '8px' : '8px 8px 0 0'};
+    box-shadow: 0px 0px 100px 10px rgba(52, 52, 168, 0.15);
+    border-bottom: ${props => props.roundBottom === 0 ? 'none' : '1px solid #C4C4C4'};
+    padding: 5px 0;
+`;
+
+const Input = styled.input`
+    width: 320px;
+    padding: 10px 20px;
+    border: none;
+    font-size: 15px;
+    font-weight: 300;
+    color: #969696;
+
+    &::placeholder{
+        font-size: 15px;
+        font-weight: 300;
+        color: #DADADA !important;
+    }
 
     &:focus{
         outline: 0;
     }
 `;
 
-const Option = styled.span`
-    width: 99%;
-    margin-left: .5%;
-    height: 40px;
-    border-bottom: 1px solid #ccc;
+const AutoCompleteAction = styled.button`
+    background: #fff;
+    display: ${props => props.hide ? 'none' : 'flex'};
+    align-items: center;
+    justify-content: center;
+    border: none;
+    position: relative;
+
+    &:focus{
+        outline: 0 !important;
+    }
+
+    &:last-child{
+        border-left: 1px solid #DADADA;
+    }
+`;
+
+const ActionDescription = styled.span`
+    opacity: ${props => props.hide ? '1' : '0'};
+    pointer-events: none !important;
+    position: absolute;
+    width: max-content;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 4px;
+    background: #6d6d6d;
+    color: #fff;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 300ms;
+`;
+
+const Image = styled.img`
+    cursor: pointer;
     background: transparent;
+    border-radius: 44%;
+    padding: 10px;
+    margin: 0 5px;
+    transition: 300ms;
+
+    &:hover{
+        background: rgba(205, 205, 205, 0.3);
+    }
+`;
+
+const Option = styled.span`
+    width: calc(100% - 10px);
+    height: 40px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: start;
     justify-content: center;
-    font-weight: bold;
-    color: rgba(44, 44, 44, 1);
+    color: #969696;
     background: #fff;
-    padding: 14px 8px;
+    padding-left: 40px;
     box-sizing: border-box;
+    font-size: 15px;
     cursor: pointer;
-    font-size: 13px;
+    font-weight: 400;
+    transition: 300ms;
 
     &:hover{
-        color: rgb(0, 116, 232);
+        color: #3434A8;
+        background: rgba(245, 245, 245, 1);
     }
 
     &:first-child{
@@ -57,5 +119,13 @@ const Option = styled.span`
     }
 `;
 
-export { Container, Input, Option };
+export {
+    Container,
+    Header,
+    Input,
+    Option,
+    AutoCompleteAction,
+    ActionDescription,
+    Image
+};
 

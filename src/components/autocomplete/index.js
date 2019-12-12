@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Input, Option } from './styles';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { capitalize, ignoreAcentuation } from '../../util/stringHandler';
+import {
+    Container,
+    Input,
+    Option,
+    AutoCompleteAction,
+    ActionDescription,
+    Image,
+    Header,
+} from './styles';
 
-const AutoComplete = ({ modifyState, placeholder, options, filter, closeSuggestions }) => {
+import searchIcon from '../../assets/icons/search.svg';
+import closeSuggentionsIcon from '../../assets/icons/close-suggestions.svg';
+
+const AutoComplete = (props) => {
 
     const [matches, setMatches] = useState([]);
     const [matchesIterator, setMatchesIterator] = useState(0);
 
+    const [hoverSearch, setHoverSearch] = useState(false);
+    const [hoverRemoveFilter, setHoverRemoverFilter] = useState(false);
+
     useEffect(() => {
-        if (closeSuggestions) {
+        if (props.closeSuggestions) {
             setMatches([]);
             setMatchesIterator(0);
         }
-    }, [closeSuggestions]);
+    }, [props.closeSuggestions]);
 
     const handleOptionClick = (value) => {
 
@@ -23,13 +37,10 @@ const AutoComplete = ({ modifyState, placeholder, options, filter, closeSuggesti
 
         setMatches([]);
         setMatchesIterator(0);
-        modifyState(value);
-        filter(value);
+        props.filter(value);
     }
 
     const handleInputChange = (e) => {
-
-        modifyState(capitalize(e.target.value));
         setMatchesIterator(0);
 
         const filterParam = ignoreAcentuation(e.target.value)
@@ -37,7 +48,7 @@ const AutoComplete = ({ modifyState, placeholder, options, filter, closeSuggesti
             .toLowerCase();
 
         if (filterParam.length >= 3 && !matches.includes(filterParam)) {
-            const matches = options.filter(word => {
+            const matches = props.options.filter(word => {
                 return ignoreAcentuation(word)
                     .toLowerCase()
                     .trim()
@@ -57,7 +68,7 @@ const AutoComplete = ({ modifyState, placeholder, options, filter, closeSuggesti
         const pressedKey = e.key;
 
         if (pressedKey === 'Enter') {
-            filter(currentValue);
+            props.filter(currentValue);
             setMatches([]);
         }
 
@@ -78,20 +89,61 @@ const AutoComplete = ({ modifyState, placeholder, options, filter, closeSuggesti
         }
     }
 
+    const handleInputAction = (type) => {
+
+        const currentValue = document.querySelector('#autocomplete-input').value;
+
+        if (type === 'search') {
+            props.filter(currentValue);
+            setMatches([]);
+        }
+        if (type === 'close') {
+            props.removeFilter();
+            document.querySelector('#autocomplete-input').value = '';
+        }
+    }
+
     return (
         <Container>
-            <Input
-                id='autocomplete-input'
-                placeholder={placeholder}
-                onChange={handleInputChange}
-                onKeyPress={handleInputKeyPress}
-                onKeyDown={handleInputKeyPress}
-            />
+            <Header roundBottom={matches.length}>
+                <Input
+                    id='autocomplete-input'
+                    placeholder={props.placeholder}
+                    onChange={handleInputChange}
+                    onKeyPress={handleInputKeyPress}
+                    onKeyDown={handleInputKeyPress}
+                    autoComplete='off'
+                    autoCorrect='off'
+                    spellCheck='false'
+                />
+                <AutoCompleteAction
+                    onClick={() => handleInputAction('search')}
+                    onMouseOver={() => setHoverSearch(true)}
+                    onMouseOut={() => setHoverSearch(false)}
+                >
+                    <ActionDescription hide={hoverSearch}>Buscar Município</ActionDescription>
+                    <Image src={searchIcon} />
+                </AutoCompleteAction>
+                <AutoCompleteAction
+                    hide={!props.isFilterng}
+                    onClick={() => handleInputAction('close')}
+                    onMouseOver={() => setHoverRemoverFilter(true)}
+                    onMouseOut={() => setHoverRemoverFilter(false)}
+                >
+                    <ActionDescription hide={hoverRemoveFilter}>Remover Filro</ActionDescription>
+                    <Image src={closeSuggentionsIcon} />
+                </AutoCompleteAction>
+            </Header>
             <Scrollbars style={{
                 width: '100%',
+                margin: '0',
+                padding: '0',
                 height: `${matches.length * 40}px`,
                 maxHeight: '240px',
                 display: matches.length > 0 ? 'flex' : 'none',
+                flexDirection: 'column',
+                borderRadius: '0 0 8px 8px',
+                background: '#fff',
             }}>
                 {
                     matches.map((option, index) => {
