@@ -46,7 +46,8 @@ const Map = () => {
     }));
 
     const [tileLayer] = useState(L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        // 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Vituuuu'
     }));
 

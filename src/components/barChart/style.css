@@ -1,0 +1,25 @@
+.recharts-rectangle{
+    cursor: pointer !important;
+}
+
+.recharts-tootip-cursor{
+    cursor: pointer !important;
+}
+
+.recharts-default-tooltip{ /* quadrado */
+    background: #fff !important;
+    border: none;
+    box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, .2) !important;
+    border: none !important;
+    border-radius: 6px !important;
+}
+
+.recharts-tooltip-label{ /* titulo do quadrado */
+    color: #3434A8 !important;
+    font-weight: 500 !important;
+    outline: none !important;
+}
+
+.recharts-default-tooltip ul *{ /* conteudo do quadrado */
+    color: #606060 !important;
+}

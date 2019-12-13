@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
     *{
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
     html{
@@ -15,11 +17,9 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body{
-        margin: ${props => props.m || 0};
-        padding: ${props => props.p || 0};
-        background: ${props => props.bg || 'rgba(248, 249, 253)'};
-        min-width: 100vw !important;
-        max-width: 100vw !important;
+        margin: 0;
+        padding: 0;
+        background: #fff;
     }
 `;
 

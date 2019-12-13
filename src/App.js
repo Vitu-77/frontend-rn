@@ -1,13 +1,15 @@
 import React from 'react';
 import Routes from './routes';
-import { GlobalStyle } from './styles/globalStyle';
+import { GlobalStyle } from './global/styles/globalStyle';
+import { ThemeProvider } from 'styled-components';
+import theme from './global/styles/Theme';
 
 const App = () => {
     return (
-        <React.Fragment>
+        <ThemeProvider theme={theme}>
             <Routes />
             <GlobalStyle />
-        </React.Fragment>
+        </ThemeProvider>
     )
 }
 
