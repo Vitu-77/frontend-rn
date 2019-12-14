@@ -52,7 +52,7 @@ const Tab = styled.div`
 
 const Indicator = styled.div`
     position: absolute;
-    top: 92%;
+    top: calc(100% - ${props => props.height}px);
     left: ${props => `${props.left}px` || '0%'};
     width: ${props => `${props.width}px`};
     height: ${props => `${props.height}px` || '2px'};

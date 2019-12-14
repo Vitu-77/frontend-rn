@@ -15,12 +15,12 @@ const PoliticSection = (props) => {
             <SubSectionTitle>Comissão Política do Município</SubSectionTitle>
             <SectionRow>
                 <MayorWrapper>
-                    <h3>Atual Prefeito</h3>
                     <span>Prefeito</span>
+                    <h3>Atual Prefeito</h3>
                 </MayorWrapper>
                 <MayorWrapper>
-                    <h3>Vice Prefeito</h3>
                     <span>Vice Prefeito</span>
+                    <h3>Vice Prefeito</h3>
                 </MayorWrapper>
             </SectionRow>
             <SectionRow>
@@ -29,16 +29,9 @@ const PoliticSection = (props) => {
                     <Councilor>Victor Silva</Councilor>
                     <Councilor>Vanderlei de Souva Abreu</Councilor>
                     <Councilor>Camargo de Lacerda</Councilor>
-                    <Councilor>Bobril da silva</Councilor>
-                    <Councilor>Joaquin pedeira dos Santos</Councilor>
-                    <Councilor>Hugo de lacate</Councilor>
-                    <Councilor>Pano de chão</Councilor>
-                    <Councilor>Arrox mascavo de Soáres</Councilor>
-                    <Councilor>Pitchbila das dores</Councilor>
-                    <Councilor>Amélia minha avó</Councilor>
-                    <Councilor>Bisavó na verdade</Councilor>
-                    <Councilor>Cachorro de mederios</Councilor>
+                    <Councilor>Victor Silva</Councilor>
                     <Councilor>Vanderlei de Souva Abreu</Councilor>
+                    <Councilor>Camargo de Lacerda</Councilor>
                 </CouncilorWrapper>
             </SectionRow>
             <SubSectionTitle>Eleitorado do Município</SubSectionTitle>
