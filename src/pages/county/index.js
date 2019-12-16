@@ -8,11 +8,8 @@ import { PrimaryButton } from '../../components/button/index';
 import TabsNavigation from '../../components/tabs/index';
 import { PoliticSection } from '../../components/countySections/index';
 
-import theme from '../../global/styles/Theme';
+import theme from '../../global/styles/theme';
 
-// import PizzaChart from '../../components/pizzaChart/index';
-// import BarChart from '../../components/barChart/index';
-// import ChartsWrapper from './styles';
 // import Suspense from '../../components/suspense/index';
 // import Loading from '../../assets/loading.svg';
 import {
@@ -33,15 +30,12 @@ const County = () => {
     useEffect(() => {
         const fetch = async () => {
             const { data } = await getCountyInfos(countyName);
-
             await setCountyData(data);
         }
 
         fetch();
     }, [countyName, setCountyData]);
-    
-    console.log(countyData);
-    
+
     return (
         <Fragment>
             <Header />
@@ -50,25 +44,34 @@ const County = () => {
                     <ContainerHeader>
                         <Ancors ancors={[
                             { name: 'Início', href: '/' },
-                            { name: 'Natal', href: null }, //substituir pelo nome do municipio 
+                            { name: countyData?.general?.countyName, href: null },
                         ]} />
                         <HeaderRow>
-                            <CountyName countyName='Rafael Godeiro' isCapital={true} />
-                            <PrimaryButton content='Editar Município' />
+                            <CountyName
+                                countyName={countyData?.general?.countyName}
+                                isCapital={countyData?.general?.isStateCapital}
+                            />
+                            <PrimaryButton content='Editar Município' handleClick={() => {
+                                console.log(countyData);
+                            }} />
                         </HeaderRow>
                         <HeaderRow>
                             <GeneralInfos>
                                 <GeneralInfo>
                                     <span>População</span>
-                                    <span>5.479</span>
+                                    <span>{countyData?.general?.population}</span>
                                 </GeneralInfo>
                                 <GeneralInfo>
                                     <span>Porte</span>
-                                    <span>Pequeno</span>
+                                    <span>{
+                                        countyData?.general?.countySize === 1
+                                            ? 'Pequeno' : countyData?.general?.countySize === 2
+                                                ? 'Médio' : 'Grande'
+                                    }</span>
                                 </GeneralInfo>
                                 <GeneralInfo>
                                     <span>Microregião</span>
-                                    <span>Umarizal</span>
+                                <span>{countyData?.general?.microRegion}</span>
                                 </GeneralInfo>
                             </GeneralInfos>
                         </HeaderRow>
@@ -77,17 +80,17 @@ const County = () => {
                         <TabsNavigation
                             styles={{
                                 indicatorTransition: '500ms',
-                                indicatorColor: theme.primarySystemColor,
+                                indicatorColor: theme.secondarySystemColor,
                                 indicatorHeight: 3,
                                 gap: '0 0 5px 0',
                                 tabColor: theme.secondaryGrey,
                                 tabPadding: '5px 20px',
-                                tabHoverColor: theme.primaryGrey,
+                                tabHoverColor: theme.secondarySystemColor,
                                 tabTransition: '300ms',
                                 fontSize: '21px',
                                 fontWeight: 400,
                                 activeTabFontWeight: 500,
-                                activeTabColor: theme.primarySystemColor,
+                                activeTabColor: theme.secondarySystemColor,
                             }}
                             tabs={[
                                 'Dados Políticos',

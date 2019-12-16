@@ -8,8 +8,16 @@ const Ancors = ({ ancors }) => {
             {
                 ancors.map(ancor => {
                     return ancor.href
-                        ? <Ancor key={ancor.name} href={ancor.href}>{ancor.name} /</Ancor>
-                        : <Ancor key={ancor.name} href={ancor.href}>{`  ${ancor.name}`}</Ancor>
+                        ?
+                        <Ancor
+                            key={`${ancor.name}${Date.now()}`}
+                            href={ancor.href}>{ancor.name} /
+                            </Ancor>
+                        :
+                        <Ancor
+                            key={`${ancor.name}${Date.now()}`}
+                            href={ancor.href}>{`  ${ancor.name}`}
+                        </Ancor>
                 })
             }
         </AncorsList>

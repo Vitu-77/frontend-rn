@@ -48,7 +48,7 @@ const GeneralInfo = styled.li`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 0 20px 0 0;
+    margin: 0 30px 0 0;
     
     span{
 
@@ -57,12 +57,14 @@ const GeneralInfo = styled.li`
         &:first-child{
             font-size: 16px;
             color: ${props => props.theme.secondaryGrey};
-            margin-right: 5px;
+            margin-right: 10px;
+            font-weight: 300;
         }
         &:last-child{
             font-size: 16px;
-            color: ${props => props.theme.primarySystemColor};
+            color: ${props => props.theme.primaryGrey};
             margin-right: 0;
+            font-weight: 400;
         }
     }
 `;

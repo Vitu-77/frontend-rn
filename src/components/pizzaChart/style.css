@@ -1,3 +1,7 @@
 .recharts-sector{
     cursor: pointer !important;
 }
+
+g text:last-child{
+    font-size: 12px;
+}

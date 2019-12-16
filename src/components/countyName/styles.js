@@ -6,7 +6,7 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.h1`
-    font-size: 40px;
+    font-size: 44px;
     font-weight: 400;
     color: ${props => props.theme.primaryGrey};
 `;
@@ -15,10 +15,10 @@ const Capital = styled.span`
     display: ${props => props.display};
     cursor: default;
     text-transform: uppercase;
-    font-size: 11px;
-    position: absolute;
-    top: -10%;
-    left: 1%;
+    font-size: 12px;   
+    width: 100%;
+    text-align: start;
+    margin-bottom: -5px;
     font-weight: 500;
     color: ${props => props.theme.primarySystemColor};
 `;
