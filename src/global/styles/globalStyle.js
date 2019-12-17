@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -9,6 +10,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         margin: 0;
         padding: 0;
+
+        &::selection{
+            background: ${theme.secondarySystemColor};
+            color: ${theme.white}
+        }
     }
 
     html{

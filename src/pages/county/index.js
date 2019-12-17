@@ -6,11 +6,15 @@ import Ancors from '../../components/ancors/index';
 import CountyName from '../../components/countyName/index';
 import { PrimaryButton } from '../../components/button/index';
 import TabsNavigation from '../../components/tabs/index';
-import { PoliticSection, EconomicSection } from '../../components/countySections/index';
 import Suspense from '../../components/suspense/index';
 import Loading from '../../assets/loading.svg';
-
 import theme from '../../global/styles/theme';
+
+import {
+    PoliticSection,
+    EconomicSection,
+    CulturalSection
+} from '../../components/countySections/index';
 
 import {
     Main,
@@ -33,9 +37,9 @@ const County = () => {
             await setCountyData(data);
         }
 
-        setTimeout(() => {
-            fetch();
-        }, 1000);
+        // setTimeout(() => {
+        fetch();
+        // }, 1000);
     }, [countyName, setCountyData]);
 
     return (
@@ -105,8 +109,8 @@ const County = () => {
                                 ]}
                                 panels={[
                                     <PoliticSection data={countyData?.political} />,
-                                    <EconomicSection data={countyData?.economic} />,
-                                    'Cultural'
+                                    <EconomicSection data={countyData?.economy} />,
+                                    <CulturalSection data={countyData?.economy} />
                                 ]}
                             />
                         </ContainerBody>

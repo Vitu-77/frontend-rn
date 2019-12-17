@@ -53,6 +53,7 @@ const ChartWrapper = styled.div`
     transition: 300ms;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    margin-right: 10px;
 
     @media(max-width: 1085px){
         width: 100%;
@@ -60,7 +61,6 @@ const ChartWrapper = styled.div`
     }
     
     &:first-child{
-        margin-right: 10px;
         
         @media(max-width: 1085px){
             margin-right: 0;
@@ -68,12 +68,7 @@ const ChartWrapper = styled.div`
         }
     }
     &:last-child{
-        margin-left: 10px;
-        
-        @media(max-width: 1085px){
-            margin-left: 0;
-            margin-top: 10px;    
-        }
+        margin-right: 0;
     }
 `;
 
@@ -83,14 +78,14 @@ const ChartTitle = styled.h3`
     position: absolute;
     color: ${props => props.theme.secondaryGrey};
     width: 100%;
-    text-align: left;
+    text-align: ${props => props.align || 'start'};
     text-transform: uppercase;
     top: 0;
     padding: 2% 0 0 2%;
     transition: 300ms;
 `;
 
-const MayorWrapper = styled.article`
+const InfoWrapper = styled.article`
     margin-right: 40px;
     max-width: max-content;
     position: relative;
@@ -116,7 +111,7 @@ const MayorWrapper = styled.article`
     }
 `;
 
-const CouncilorWrapper = styled.article`
+const MultipleItensWrapper = styled.article`
     width: 100%;
     position: relative;
     display: flex;
@@ -135,8 +130,10 @@ const CouncilorWrapper = styled.article`
     }
 `;
 
-const Councilor = styled.p`
+const Item = styled.a`
+    pointer-events: ${props => props.isLink ? 'all' : 'visible'};
     border: 1px solid ${props => props.theme.blackOpacity2};
+    text-decoration: none !important;
     padding: 4px;
     font-size: 16px;
     margin: 5px 5px 5px 0;
@@ -145,6 +142,32 @@ const Councilor = styled.p`
     font-weight: 400;
     text-transform: capitalize;
     flex: auto;
+    transition: 300ms;
+
+    &:hover{
+        cursor: ${props => props.isLink ? 'pointer' : 'text'};
+        color: ${props => props.isLink ? props.theme.secondarySystemColor : props.theme.primaryGrey};
+    }
+`;
+
+const ShortItem = styled.a`
+    pointer-events: ${props => props.isLink ? 'all' : 'visible'};
+    border: 1px solid ${props => props.theme.blackOpacity2};
+    text-decoration: none !important;
+    padding: 4px 6px;
+    max-width: max-content;
+    font-size: 16px;
+    margin: 5px 5px 5px 0;
+    border-radius: 2px;
+    color: ${props => props.theme.primaryGrey};
+    font-weight: 400;
+    text-transform: capitalize;
+    transition: 300ms;
+
+    &:hover{
+        cursor: ${props => props.isLink ? 'pointer' : 'text'};
+        color: ${props => props.isLink ? props.theme.secondarySystemColor : props.theme.primaryGrey};
+    }
 `;
 
 export {
@@ -154,7 +177,8 @@ export {
     SectionChartRow,
     ChartWrapper,
     ChartTitle,
-    MayorWrapper,
-    CouncilorWrapper,
-    Councilor,
+    InfoWrapper,
+    MultipleItensWrapper,
+    Item,
+    ShortItem
 }

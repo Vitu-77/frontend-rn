@@ -5,6 +5,7 @@ import AutoComplete from '../autocomplete/index';
 import geoJSON from '../../data/geoJson';
 import counties from '../../data/counties';
 import { ignoreAcentuation, capitalize } from '../../util/stringHandler';
+import { redirectTo } from '../../util/navigation';
 import {
     MapContainer,
     MapRoot,
@@ -35,7 +36,9 @@ const Map = () => {
 
                     layer.setStyle(defaultStyle);
                 },
-                click: () => handleLayerClick(layer.feature.properties.NM_MUNICIP)
+                click: () => {
+                    redirectTo(`/county/${layer.feature.properties.NM_MUNICIP.toLowerCase()}`)
+                }
             });
 
             layer.bindTooltip(capitalize(layer.feature.properties.NM_MUNICIP), {
@@ -100,7 +103,9 @@ const Map = () => {
                 layer.on({
                     mousemove: () => layer.setStyle(filteredHoveredStyle),
                     mouseout: () => layer.setStyle(filteredDefaultStyle),
-                    click: () => handleLayerClick(layer.feature.properties.NM_MUNICIP)
+                    click: () => {
+                        redirectTo(`/county/${layer.feature.properties.NM_MUNICIP.toLowerCase()}`)
+                    }
                 });
             },
             filter: (feature, layer) => {
@@ -152,10 +157,6 @@ const Map = () => {
         setTimeout(() => {
             setCloseSuggestions(false);
         }, 100);
-    }
-
-    const handleLayerClick = (countyName) => {
-        return window.location.href = `/county/${countyName.toLowerCase()}`;
     }
 
     return (

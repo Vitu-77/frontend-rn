@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Btn = styled.button`
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 15px;
     text-transform: uppercase;
     padding: 12px 15px;
@@ -15,6 +15,8 @@ const Btn = styled.button`
     &:hover{
         background: ${props => props.theme.secondarySystemColor};
         color: ${props => props.theme.white};
+        border-color: ${props => props.theme.secondarySystemColor};
+        box-shadow: 0 4px 14px 0 #27279326;
     }
 `;
 

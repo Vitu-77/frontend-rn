@@ -7,9 +7,13 @@ const Container = styled.div`
     transform: translateX(-50%);
 
     z-index: 10000 !important;
+
+    @media(max-width: 515px){
+        top: 12%;
+    }
 `;
 
-const Header = styled.header`
+const Wrapper = styled.div`
     width: 500px;
     background: #fff;
     width: 100%;
@@ -21,6 +25,10 @@ const Header = styled.header`
     box-shadow: 0px 0px 100px 10px rgba(52, 52, 168, 0.15);
     border-bottom: ${props => props.roundBottom === 0 ? 'none' : '1px solid #C4C4C4'};
     padding: 5px 0;
+
+    @media(max-width: 485px){
+        width: 80vw;
+    }
 `;
 
 const Input = styled.input`
@@ -40,6 +48,10 @@ const Input = styled.input`
     &:focus{
         outline: 0;
     }
+
+    @media(max-width: 485px){
+        width: 180px;
+    }
 `;
 
 const AutoCompleteAction = styled.button`
@@ -49,6 +61,7 @@ const AutoCompleteAction = styled.button`
     justify-content: center;
     border: none;
     position: relative;
+    justify-self: flex-end !important;
 
     &:focus{
         outline: 0 !important;
@@ -122,7 +135,7 @@ const Option = styled.span`
 
 export {
     Container,
-    Header,
+    Wrapper,
     Input,
     Option,
     AutoCompleteAction,

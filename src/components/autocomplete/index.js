@@ -8,7 +8,7 @@ import {
     AutoCompleteAction,
     ActionDescription,
     Image,
-    Header,
+    Wrapper,
 } from './styles';
 
 import searchIcon from '../../assets/icons/search.svg';
@@ -104,7 +104,7 @@ const AutoComplete = (props) => {
 
     return (
         <Container>
-            <Header roundBottom={matches.length}>
+            <Wrapper roundBottom={matches.length}>
                 <Input
                     id='autocomplete-input'
                     placeholder={props.placeholder}
@@ -133,7 +133,7 @@ const AutoComplete = (props) => {
                     <ActionDescription hide={hoverRemoveFilter}>Remover Filro</ActionDescription>
                     <Image src={closeSuggentionsIcon} />
                 </AutoCompleteAction>
-            </Header>
+            </Wrapper>
             <Scrollbars style={{
                 width: '100%',
                 margin: '0',
