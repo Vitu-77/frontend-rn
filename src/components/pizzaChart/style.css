@@ -5,3 +5,13 @@
 g text:last-child{
     font-size: 12px;
 }
+
+.chart-center-text{
+    font-size: 15px;
+    background: #fff !important;
+}
+
+.primary-text{
+    font-size: 14px;
+    fill: #606060;
+}

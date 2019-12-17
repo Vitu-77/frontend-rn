@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
 import './style.css';
 
-const PizzaChart = ({ scale = 400, data, color, hoverColor }) => {
+const PizzaChart = ({ dataKey, scale = 400, data, color, hoverColor }) => {
 
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -10,7 +10,7 @@ const PizzaChart = ({ scale = 400, data, color, hoverColor }) => {
         const RADIAN = Math.PI / 180;
         const {
             cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-            fill, payload, percent, value,
+            payload, percent, value,
         } = props;
         const sin = Math.sin(-RADIAN * midAngle);
         const cos = Math.cos(-RADIAN * midAngle);
@@ -24,7 +24,16 @@ const PizzaChart = ({ scale = 400, data, color, hoverColor }) => {
 
         return (
             <g>
-                <text x={cx} y={cy} dy={8} textAnchor="middle" fill={hoverColor}>{payload.name}</text>
+                <text
+                    className='chart-center-text'
+                    x={cx}
+                    y={cy}
+                    dy={8}
+                    textAnchor="middle"
+                    fill={hoverColor}
+                >
+                    {payload.name}
+                </text>
                 <Sector
                     cx={cx}
                     cy={cy}
@@ -45,7 +54,9 @@ const PizzaChart = ({ scale = 400, data, color, hoverColor }) => {
                 />
                 <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={hoverColor} fill="none" />
                 <circle cx={ex} cy={ey} r={2} fill={hoverColor} stroke="none" />
-                <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
+                <text className='primary-text' x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">
+                    {`Total: ${value}`}
+                </text>
                 <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
                     {`(${(percent * 100).toFixed(2)}%)`}
                 </text>
@@ -70,7 +81,7 @@ const PizzaChart = ({ scale = 400, data, color, hoverColor }) => {
                 innerRadius={40}
                 outerRadius={60}
                 fill={color}
-                dataKey="value"
+                dataKey={dataKey}
                 onMouseEnter={onPieEnter}
             />
         </PieChart>

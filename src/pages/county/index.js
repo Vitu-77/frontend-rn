@@ -6,12 +6,12 @@ import Ancors from '../../components/ancors/index';
 import CountyName from '../../components/countyName/index';
 import { PrimaryButton } from '../../components/button/index';
 import TabsNavigation from '../../components/tabs/index';
-import { PoliticSection } from '../../components/countySections/index';
+import { PoliticSection, EconomicSection } from '../../components/countySections/index';
+import Suspense from '../../components/suspense/index';
+import Loading from '../../assets/loading.svg';
 
 import theme from '../../global/styles/theme';
 
-// import Suspense from '../../components/suspense/index';
-// import Loading from '../../assets/loading.svg';
 import {
     Main,
     ContentContainer,
@@ -33,87 +33,88 @@ const County = () => {
             await setCountyData(data);
         }
 
-        fetch();
+        setTimeout(() => {
+            fetch();
+        }, 1000);
     }, [countyName, setCountyData]);
 
     return (
         <Fragment>
             <Header />
             <Main>
-                <ContentContainer>
-                    <ContainerHeader>
-                        <Ancors ancors={[
-                            { name: 'Início', href: '/' },
-                            { name: countyData?.general?.countyName, href: null },
-                        ]} />
-                        <HeaderRow>
-                            <CountyName
-                                countyName={countyData?.general?.countyName}
-                                isCapital={countyData?.general?.isStateCapital}
+                <Suspense
+                    fallback={<img src={Loading} alt='loading...' />}
+                    resource={countyData}
+                >
+                    <ContentContainer>
+                        <ContainerHeader>
+                            <Ancors ancors={[
+                                { name: 'Início', href: '/' },
+                                { name: countyData?.general?.countyName, href: null },
+                            ]} />
+                            <HeaderRow>
+                                <CountyName
+                                    countyName={countyData?.general?.countyName}
+                                    isCapital={countyData?.general?.isStateCapital}
+                                />
+                                <PrimaryButton content='Editar Município' handleClick={() => {
+                                    console.log(countyData);
+                                }} />
+                            </HeaderRow>
+                            <HeaderRow>
+                                <GeneralInfos>
+                                    <GeneralInfo>
+                                        <span>População</span>
+                                        <span>{countyData?.general?.population}</span>
+                                    </GeneralInfo>
+                                    <GeneralInfo>
+                                        <span>Porte</span>
+                                        <span>{
+                                            countyData?.general?.countySize === 1
+                                                ? 'Pequeno' : countyData?.general?.countySize === 2
+                                                    ? 'Médio' : 'Grande'
+                                        }</span>
+                                    </GeneralInfo>
+                                    <GeneralInfo>
+                                        <span>Microregião</span>
+                                        <span>{countyData?.general?.microRegion}</span>
+                                    </GeneralInfo>
+                                </GeneralInfos>
+                            </HeaderRow>
+                        </ContainerHeader>
+                        <ContainerBody>
+                            <TabsNavigation
+                                styles={{
+                                    indicatorTransition: '500ms',
+                                    indicatorColor: theme.secondarySystemColor,
+                                    indicatorHeight: 3,
+                                    gap: '0 0 5px 0',
+                                    tabColor: theme.secondaryGrey,
+                                    tabPadding: '5px 20px',
+                                    tabHoverColor: theme.secondarySystemColor,
+                                    tabTransition: '300ms',
+                                    fontSize: '21px',
+                                    fontWeight: 400,
+                                    activeTabFontWeight: 500,
+                                    activeTabColor: theme.secondarySystemColor,
+                                }}
+                                tabs={[
+                                    'Dados Políticos',
+                                    'Dados Econômicos',
+                                    'Dados Culturais'
+                                ]}
+                                panels={[
+                                    <PoliticSection data={countyData?.political} />,
+                                    <EconomicSection data={countyData?.economic} />,
+                                    'Cultural'
+                                ]}
                             />
-                            <PrimaryButton content='Editar Município' handleClick={() => {
-                                console.log(countyData);
-                            }} />
-                        </HeaderRow>
-                        <HeaderRow>
-                            <GeneralInfos>
-                                <GeneralInfo>
-                                    <span>População</span>
-                                    <span>{countyData?.general?.population}</span>
-                                </GeneralInfo>
-                                <GeneralInfo>
-                                    <span>Porte</span>
-                                    <span>{
-                                        countyData?.general?.countySize === 1
-                                            ? 'Pequeno' : countyData?.general?.countySize === 2
-                                                ? 'Médio' : 'Grande'
-                                    }</span>
-                                </GeneralInfo>
-                                <GeneralInfo>
-                                    <span>Microregião</span>
-                                <span>{countyData?.general?.microRegion}</span>
-                                </GeneralInfo>
-                            </GeneralInfos>
-                        </HeaderRow>
-                    </ContainerHeader>
-                    <ContainerBody>
-                        <TabsNavigation
-                            styles={{
-                                indicatorTransition: '500ms',
-                                indicatorColor: theme.secondarySystemColor,
-                                indicatorHeight: 3,
-                                gap: '0 0 5px 0',
-                                tabColor: theme.secondaryGrey,
-                                tabPadding: '5px 20px',
-                                tabHoverColor: theme.secondarySystemColor,
-                                tabTransition: '300ms',
-                                fontSize: '21px',
-                                fontWeight: 400,
-                                activeTabFontWeight: 500,
-                                activeTabColor: theme.secondarySystemColor,
-                            }}
-                            tabs={[
-                                'Dados Políticos',
-                                'Dados Econômicos',
-                                'Dados Culturais'
-                            ]}
-                            panels={[
-                                <PoliticSection />,
-                                'Econômico',
-                                'Cultural'
-                            ]}
-                        />
-                    </ContainerBody>
-                </ContentContainer>
+                        </ContainerBody>
+                    </ContentContainer>
+                </Suspense>
             </Main>
         </Fragment>
     )
 }
 
 export default County;
-    // <Suspense fallback={<img src={Loading} />} resource={countyData}>
-    //     <ChartsWrapper>
-    //         <BarChart data={countyData?.general?.chartData} />
-    //         <PizzaChart data={countyData?.general?.chartData} scale={360} />
-    //     </ChartsWrapper>
-    // </Suspense>

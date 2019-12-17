@@ -3,7 +3,7 @@ import { BarChart as Chart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 're
 
 import './style.css';
 
-const BarChart = ({ scale = 500, data, color, hoverColor }) => {
+const BarChart = ({ dataKey, data, scale = 500, color }) => {
     return (
         <Chart
             width={scale}
@@ -12,10 +12,10 @@ const BarChart = ({ scale = 500, data, color, hoverColor }) => {
             margin={{ top: 35, right: 30, left: 20, bottom: 5, }}
         >
             <CartesianGrid strokeDasharray="2 2" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey={dataKey[0]} />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="value" fill={color} />
+            <Bar dataKey={dataKey[1]} fill={color} />
         </Chart>
     );
 }

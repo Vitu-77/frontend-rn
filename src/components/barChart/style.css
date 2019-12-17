@@ -22,4 +22,6 @@
 
 .recharts-default-tooltip ul *{ /* conteudo do quadrado */
     color: #606060 !important;
+    font-size: 14px;
+    text-transform: capitalize;
 }
