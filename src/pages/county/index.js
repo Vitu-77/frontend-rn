@@ -1,20 +1,22 @@
+/* React Components */
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+/*Lib */
+import Suspense from '../../lib/suspense';
+/* Components */
+import Header from '../../components/header';
+import Ancors from '../../components/ancors';
+import CountyName from '../../components/countyName';
+import TabsNavigation from '../../components/tabs';
+import { PrimaryButton } from '../../components/button';
+/* Services */
 import { getCountyInfos } from '../../services/api';
-import Header from '../../components/header/index';
-import Ancors from '../../components/ancors/index';
-import CountyName from '../../components/countyName/index';
-import { PrimaryButton } from '../../components/button/index';
-import TabsNavigation from '../../components/tabs/index';
-import Suspense from '../../components/suspense/index';
+/* Assets */
 import Loading from '../../assets/loading.svg';
+/* Config/Global */
 import theme from '../../global/styles/theme';
-
-import {
-    PoliticSection,
-    EconomicSection,
-    CulturalSection
-} from '../../components/countySections/index';
+/* Styled Components */
+import { PoliticSection, EconomicSection, CulturalSection } from '../../components/countySections';
 
 import {
     Main,

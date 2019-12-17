@@ -1,6 +1,9 @@
+/* React Components */
 import React from 'react';
+/* Lib */
+import Head from '../../lib/head';
+/* Components */
 import Map from '../../components/map';
-import Head from '../../components/head';
 
 const Home = () => (
     <React.Fragment>

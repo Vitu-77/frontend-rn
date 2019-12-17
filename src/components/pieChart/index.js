@@ -1,11 +1,11 @@
 import React from 'react';
-import { PieChart, Pie, Tooltip } from 'recharts';
+import { PieChart as Chart, Pie, Tooltip } from 'recharts';
 
 import './style.css';
 
-const FullFilledPizzaChart = ({ dataKey, scale = 400, data, color }) => {
+const PieChart = ({ dataKey, scale = 400, data, color }) => {
     return (
-        <PieChart
+        <Chart
             width={scale}
             height={scale / 1.5}
         >
@@ -21,8 +21,8 @@ const FullFilledPizzaChart = ({ dataKey, scale = 400, data, color }) => {
                 className='pie'
             />
             <Tooltip />
-        </PieChart>
+        </Chart>
     );
 }
 
-export default FullFilledPizzaChart;
+export default PieChart;

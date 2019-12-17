@@ -1,12 +1,14 @@
+/* React Components */
 import React, { useState } from 'react';
-import PizzaChart from '../pizzaChart/index';
-import BarChart from '../barChart/index';
-import FullFilledPizzaChart from '../fullFilledPizzaChart/index';
-
+/* Components */
+import PizzaChart from '../pizzaChart';
+import BarChart from '../barChart';
+import PieChart from '../pieChart';
+/* Config/Global */
 import theme from '../../global/styles/theme';
+/* Styled Components */
 import {
     SectionWrapper,
-    // SubSectionTitle,
     SectionRow,
     SectionChartRow,
     ChartWrapper,
@@ -27,7 +29,6 @@ const PoliticSection = ({ data }) => {
 
     return (
         <SectionWrapper>
-            {/* <SubSectionTitle>Comissão Política do Município</SubSectionTitle> */}
             <SectionRow>
                 <InfoWrapper>
                     <span>Prefeito</span>
@@ -46,7 +47,6 @@ const PoliticSection = ({ data }) => {
                     ))}
                 </MultipleItensWrapper>
             </SectionRow>
-            {/* <SubSectionTitle>Eleitorado do Município</SubSectionTitle> */}
             <SectionRow>
                 <InfoWrapper>
                     <span>Eleitorado Total</span>
@@ -60,7 +60,7 @@ const PoliticSection = ({ data }) => {
             <SectionChartRow>
                 <ChartWrapper height={250} width={30}>
                     <ChartTitle>Divisão por sexo</ChartTitle>
-                    <FullFilledPizzaChart
+                    <PieChart
                         color={theme.ternarySystemColor}
                         data={votersPerSex}
                         dataKey={Object.keys(votersPerSex[0])[1]}
@@ -77,7 +77,7 @@ const PoliticSection = ({ data }) => {
                 </ChartWrapper>
                 <ChartWrapper height={250} width={30}>
                     <ChartTitle>Divisão por nível de escolaridade</ChartTitle>
-                    <FullFilledPizzaChart
+                    <PieChart
                         color={theme.ternarySystemColor}
                         data={votersPerSchooling}
                         dataKey={Object.keys(votersPerSchooling[0])[1]}

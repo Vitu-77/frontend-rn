@@ -1,6 +1,10 @@
+/* React Components */
 import React, { useState, useEffect } from 'react';
+/* Dependencies */
 import { Scrollbars } from 'react-custom-scrollbars';
+/* Util */
 import { capitalize, ignoreAcentuation } from '../../util/stringHandler';
+/* Styled Components */
 import {
     Container,
     Input,
@@ -11,6 +15,7 @@ import {
     Wrapper,
 } from './styles';
 
+/* Assets */
 import searchIcon from '../../assets/icons/search.svg';
 import closeSuggentionsIcon from '../../assets/icons/close-suggestions.svg';
 
