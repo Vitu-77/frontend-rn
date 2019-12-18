@@ -20,7 +20,7 @@ const SubSectionTitle = styled.h3`
 const SectionRow = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: ${props => props.direction || 'row'};
     align-items: center !important;
     justify-content: flex-start;
     margin: 30px 0 0 0;
@@ -114,9 +114,14 @@ const InfoWrapper = styled.article`
 const MultipleItensWrapper = styled.article`
     width: 100%;
     position: relative;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row;
+    gap: 5px;
 
     span{
         justify-self: flex-start;
@@ -127,22 +132,25 @@ const MultipleItensWrapper = styled.article`
         text-transform: uppercase;
         font-weight: 300;
         color: ${props => props.theme.secondaryGrey};
+
+        grid-column: span 4;
     }
 `;
 
 const Item = styled.a`
     pointer-events: ${props => props.isLink ? 'all' : 'visible'};
     border: 1px solid ${props => props.theme.blackOpacity2};
+    /* max-width: max-content; */
     text-decoration: none !important;
     padding: 4px;
     font-size: 16px;
-    margin: 5px 5px 5px 0;
     border-radius: 2px;
     color: ${props => props.theme.primaryGrey};
     font-weight: 400;
     text-transform: capitalize;
     flex: auto;
     transition: 300ms;
+    grid-column: ${props => props.gridSpan || 'span 1'};
 
     &:hover{
         cursor: ${props => props.isLink ? 'pointer' : 'text'};
@@ -150,23 +158,100 @@ const Item = styled.a`
     }
 `;
 
-const ShortItem = styled.a`
+
+const LargeItem = styled.a`
     pointer-events: ${props => props.isLink ? 'all' : 'visible'};
     border: 1px solid ${props => props.theme.blackOpacity2};
     text-decoration: none !important;
-    padding: 4px 6px;
-    max-width: max-content;
-    font-size: 16px;
-    margin: 5px 5px 5px 0;
+    padding: 6px 12px;
     border-radius: 2px;
-    color: ${props => props.theme.primaryGrey};
-    font-weight: 400;
-    text-transform: capitalize;
     transition: 300ms;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    grid-column: ${props => props.gridSpan || 'span 1'};
+
+    *{
+        width: 100%;
+        text-align: start !important;
+    }
+
+    p:first-child{
+        color: ${props => props.theme.primaryGrey};
+        font-weight: 400;
+        text-transform: capitalize;
+        font-size: 16px;
+        transition: 300ms;
+
+        span{
+            font-weight: 500;
+        }
+    }
+
+    p:last-child{
+        width: 100%;
+        text-align: start;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: ${props => props.theme.secondaryGrey};
+        
+        span{
+            font-weight: 500;
+        }
+    }
 
     &:hover{
+        p:first-child{
+            color: ${props => props.isLink ? props.theme.secondarySystemColor : props.theme.primaryGrey};
+        }
         cursor: ${props => props.isLink ? 'pointer' : 'text'};
-        color: ${props => props.isLink ? props.theme.secondarySystemColor : props.theme.primaryGrey};
+    }
+`;
+
+const Source = styled.p`
+    font-size: 15px;
+    font-style: italic;
+    color: ${props => props.theme.secondaryGrey};
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: start !important;
+
+    & > a {
+        color: ${props => props.theme.secondarySystemColor};
+        text-decoration: none;
+
+        &:hover {
+            color: ${props => props.theme.ternarySystemColor};
+        }
+    }
+`;
+
+const CountyDescription = styled.article`
+
+    width: 100%;
+
+    p{  
+        color: ${props => props.theme.primaryGrey};
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: inherit;
+        text-align: justify;
+
+        &::first-letter{
+            text-transform: uppercase;
+        }
+    }
+
+    h4{
+        width: 100% !important;
+        font-size: 12px;
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: ${props => props.theme.secondaryGrey};
+        margin-bottom: 5px;
     }
 `;
 
@@ -180,5 +265,7 @@ export {
     InfoWrapper,
     MultipleItensWrapper,
     Item,
-    ShortItem
+    LargeItem,
+    Source,
+    CountyDescription
 }

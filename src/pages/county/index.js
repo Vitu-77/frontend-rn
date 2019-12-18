@@ -2,6 +2,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 /*Lib */
+import Head from '../../lib/head';
 import Suspense from '../../lib/suspense';
 /* Components */
 import Header from '../../components/header';
@@ -17,6 +18,8 @@ import Loading from '../../assets/loading.svg';
 import theme from '../../global/styles/theme';
 /* Styled Components */
 import { PoliticSection, EconomicSection, CulturalSection } from '../../components/countySections';
+/* Util */
+import { capitalize } from '../../util/stringHandler';
 
 import {
     Main,
@@ -46,6 +49,7 @@ const County = () => {
 
     return (
         <Fragment>
+            <Head title={capitalize(countyName)} description='Descrição de Natal' />
             <Header />
             <Main>
                 <Suspense
@@ -112,7 +116,7 @@ const County = () => {
                                 panels={[
                                     <PoliticSection data={countyData?.political} />,
                                     <EconomicSection data={countyData?.economy} />,
-                                    <CulturalSection data={countyData?.economy} />
+                                    <CulturalSection data={countyData?.cultural} />
                                 ]}
                             />
                         </ContainerBody>
