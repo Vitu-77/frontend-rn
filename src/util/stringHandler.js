@@ -42,4 +42,11 @@ const ignoreAcentuation = (str) => {
     return str.trim();
 }
 
-export { capitalize, ignoreAcentuation };
+const moneyFormatter = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+});
+
+const toMoneyFormat = (amount) => moneyFormatter.format(amount);
+
+export { capitalize, ignoreAcentuation, toMoneyFormat, moneyFormatter };

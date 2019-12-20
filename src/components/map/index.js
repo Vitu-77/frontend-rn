@@ -16,6 +16,9 @@ import {
     ErrorMessage
 } from './styles';
 
+/* Leaflet elements overrider */
+import '../../styles/leafletElementsOverrider.css';
+
 const Map = () => {
 
     const [defaultLayer] = useState(L.geoJSON(geoJSON, {

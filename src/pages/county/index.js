@@ -10,16 +10,17 @@ import Ancors from '../../components/ancors';
 import CountyName from '../../components/countyName';
 import TabsNavigation from '../../components/tabs';
 import { PrimaryButton } from '../../components/button';
+import SplashScreen from '../../components/splashScreen'
 /* Services */
 import { getCountyInfos } from '../../services/api';
-/* Assets */
-import Loading from '../../assets/loading.svg';
 /* Config/Global */
 import theme from '../../global/styles/theme';
 /* Styled Components */
 import { PoliticSection, EconomicSection, CulturalSection } from '../../components/countySections';
 /* Util */
 import { capitalize } from '../../util/stringHandler';
+
+import EmptyInfoScreen from '../../components/emptyInfoScreen';
 
 import {
     Main,
@@ -34,7 +35,7 @@ import {
 const County = () => {
 
     const { countyName } = useParams();
-    const [countyData, setCountyData] = useState();
+    const [countyData, setCountyData] = useState(null);
 
     useEffect(() => {
         const fetch = async () => {
@@ -42,18 +43,19 @@ const County = () => {
             await setCountyData(data);
         }
 
-        // setTimeout(() => {
-        fetch();
-        // }, 1000);
+        setTimeout(() => {
+            fetch();
+        }, 1000);
     }, [countyName, setCountyData]);
 
     return (
         <Fragment>
-            <Head title={capitalize(countyName)} description='Descrição de Natal' />
+            <Head title={capitalize(`Nome do Sistema | ${countyName}`)} description='Descrição de Natal' />
             <Header />
             <Main>
                 <Suspense
-                    fallback={<img src={Loading} alt='loading...' />}
+                    fallback={<EmptyInfoScreen />}
+                    wait={<SplashScreen />}
                     resource={countyData}
                 >
                     <ContentContainer>

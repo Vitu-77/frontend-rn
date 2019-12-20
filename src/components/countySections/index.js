@@ -6,6 +6,8 @@ import BarChart from '../barChart';
 import PieChart from '../pieChart';
 /* Config/Global */
 import theme from '../../global/styles/theme';
+/* Util */
+import { toMoneyFormat } from '../../util/stringHandler';
 /* Styled Components */
 import {
     SectionWrapper,
@@ -126,11 +128,11 @@ const EconomicSection = ({ data }) => {
             <SectionRow>
                 <InfoWrapper>
                     <span>Orçamento anual atual</span>
-                    <h3>{data?.annualBilling}</h3>
+                    <h3>{toMoneyFormat(data?.annualBilling)}</h3>
                 </InfoWrapper>
                 <InfoWrapper>
                     <span>PIB per capta</span>
-                    <h3>{data?.pib} R$</h3>
+                    <h3>{toMoneyFormat(data?.pib)}</h3>
                 </InfoWrapper>
                 <InfoWrapper>
                     <span>IDHM</span>
@@ -162,20 +164,22 @@ const EconomicSection = ({ data }) => {
                 </MultipleItensWrapper>
             </SectionRow>
             <SectionChartRow>
-                <ChartWrapper height={350}>
+                <ChartWrapper height={350} className='barChart'>
                     <ChartTitle>Receita orçamentária nos últimos 5 anos</ChartTitle>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={lastAnnualBillings}
                         dataKey={Object.keys(lastAnnualBillings[0])}
+                        format={true}
                     />
                 </ChartWrapper>
-                <ChartWrapper height={350}>
+                <ChartWrapper height={350} className='barChart'>
                     <ChartTitle>Pib per capta nos últimos 5 anos</ChartTitle>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={lastPibs}
                         dataKey={Object.keys(lastPibs[0])}
+                        format={true}
                     />
                 </ChartWrapper>
             </SectionChartRow>

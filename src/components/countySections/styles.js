@@ -31,12 +31,18 @@ const SectionChartRow = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between !important;
     margin: 30px 0 0 0;
 
-    @media(max-width: 1085px){
+    @media(max-width: 1150px){
         flex-direction: column;
         justify-content: center;
+        margin: 0;
+    }
+
+    .lodrxs{
+        padding-top: 30px;
     }
 `;
 
@@ -55,20 +61,9 @@ const ChartWrapper = styled.div`
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     margin-right: 10px;
 
-    @media(max-width: 1085px){
+    @media(max-width: 1150px){
         width: 100%;
-        padding-top: 20px;
-    }
-    
-    &:first-child{
-        
-        @media(max-width: 1085px){
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
-    }
-    &:last-child{
-        margin-right: 0;
+        margin: 10px 0;
     }
 `;
 
@@ -183,6 +178,7 @@ const LargeItem = styled.a`
         text-transform: capitalize;
         font-size: 16px;
         transition: 300ms;
+        margin-bottom: 5px;
 
         span{
             font-weight: 500;
