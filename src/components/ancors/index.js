@@ -1,5 +1,7 @@
 import React from 'react';
 import { AncorsList, Ancor } from './styles';
+import { Link } from 'react-router-dom';
+import theme from '../../global/styles/theme';
 
 const Ancors = ({ ancors }) => {
 
@@ -9,14 +11,19 @@ const Ancors = ({ ancors }) => {
                 ancors.map(ancor => {
                     return ancor.href
                         ?
-                        <Ancor
-                            key={`${ancor.name}${Date.now()}`}
-                            href={ancor.href}>{ancor.name} /
-                            </Ancor>
+                        <Link to={ancor.href} key={`${ancor.name}${Date.now()}`}>
+                            <Ancor>{ancor.name} / </Ancor>
+                        </Link>
                         :
                         <Ancor
-                            key={`${ancor.name}${Date.now()}`}
-                            href={ancor.href}>{`  ${ancor.name}`}
+                            style={{ 
+                                pointerEvents: 'none', 
+                                color: theme.primaryGrey,
+                                marginBottom: '-1px'
+
+                            }}
+                            key={`${ancor.name}${Date.now()}`}>
+                            {`${ancor.name}`}
                         </Ancor>
                 })
             }

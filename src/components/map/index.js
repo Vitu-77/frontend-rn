@@ -70,7 +70,6 @@ const Map = () => {
             zoom: 7.5,
             minZoom: 8,
             maxZoom: 12,
-            preferCanvas: true,
             maxBounds: L.latLngBounds([[-3.492533, -39.956314], [-8.251142, -32.545212]]),
             layers: layerGroup
         }));

@@ -11,6 +11,7 @@ import CountyName from '../../components/countyName';
 import TabsNavigation from '../../components/tabs';
 import { PrimaryButton } from '../../components/button';
 import SplashScreen from '../../components/splashScreen'
+import EmptyInfoScreen from '../../components/emptyInfoScreen';
 /* Services */
 import { getCountyInfos } from '../../services/api';
 /* Config/Global */
@@ -18,10 +19,8 @@ import theme from '../../global/styles/theme';
 /* Styled Components */
 import { PoliticSection, EconomicSection, CulturalSection } from '../../components/countySections';
 /* Util */
-import { capitalize } from '../../util/stringHandler';
-
-import EmptyInfoScreen from '../../components/emptyInfoScreen';
-
+import { capitalize, toRequestFormat } from '../../util/stringHandler';
+/* Styled Components */
 import {
     Main,
     ContentContainer,
@@ -39,7 +38,7 @@ const County = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            const { data } = await getCountyInfos(countyName);
+            const { data } = await getCountyInfos(toRequestFormat(countyName));
             await setCountyData(data);
         }
 

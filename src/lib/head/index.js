@@ -6,7 +6,6 @@ const Head = ({ description, title }) => {
         <Helmet>
             <title>{title}</title>
             <meta name='description' content={description} />
-            <link rel="noopener noreferrer" />
         </Helmet>
     )
 }

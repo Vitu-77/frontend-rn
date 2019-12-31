@@ -1,18 +1,21 @@
 const capitalize = (str) => {
     if (str) {
+        const newStr = str.replace(/,/g, '').replace(/_/g, ' ');
         const capitalizedArray = [];
 
-        for (let index = 0; index < str.length; index++) {
+        for (let index = 0; index < newStr.length; index++) {
             if (index === 0) {
-                capitalizedArray.push(str.charAt(index).toUpperCase());
+                capitalizedArray.push(newStr.charAt(index).toUpperCase());
             }
             else {
-                capitalizedArray.push(str.charAt(index).toLowerCase());
+                capitalizedArray.push(newStr.charAt(index).toLowerCase());
             }
         }
 
         for (let index = 0; index < capitalizedArray.length; index++) {
-            if (capitalizedArray[index] === ' ' && capitalizedArray[index + 1]) {
+            if ((capitalizedArray[index] === ' '
+                || capitalizedArray[index] === '-')
+                && capitalizedArray[index + 1]) {
                 capitalizedArray[index + 1] = capitalizedArray[index + 1].toUpperCase();
             }
         }
@@ -26,20 +29,27 @@ const capitalize = (str) => {
 
 const ignoreAcentuation = (str) => {
 
-    str = str.replace(/[ÀÁÂÃÄÅ]/, "A");
-    str = str.replace(/[àáâãäå]/, "a");
-    str = str.replace(/[ÈÉÊË]/, "E");
-    str = str.replace(/[èéê]/, "e");
-    str = str.replace(/[ÌÍ]/, "I");
-    str = str.replace(/[ìí]/, "i");
-    str = str.replace(/[ÒÓÔÕ]/, "O");
-    str = str.replace(/[òóôõ]/, "o");
-    str = str.replace(/[ÙÚÛ]/, "U");
-    str = str.replace(/[ùúû]/, "u");
-    str = str.replace(/[ç]/, "c");
-    str = str.replace(/[Ç]/, "C");
+    str = str.replace(/[ÀÁÂÃÄÅ]/g, "A");
+    str = str.replace(/[àáâãäå]/g, "a");
+    str = str.replace(/[ÈÉÊË]/g, "E");
+    str = str.replace(/[èéê]/g, "e");
+    str = str.replace(/[ÌÍ]/g, "I");
+    str = str.replace(/[ìí]/g, "i");
+    str = str.replace(/[ÒÓÔÕ]/g, "O");
+    str = str.replace(/[òóôõ]/g, "o");
+    str = str.replace(/[ÙÚÛ]/g, "U");
+    str = str.replace(/[ùúû]/g, "u");
+    str = str.replace(/[ç]/g, "c");
+    str = str.replace(/[Ç]/g, "C");
 
     return str.trim();
+}
+
+const toRequestFormat = (str) => {
+    str = ignoreAcentuation(str);
+    str = str.replace(/[- ]/g, '_');
+
+    return str;
 }
 
 const moneyFormatter = new Intl.NumberFormat('pt-br', {
@@ -47,6 +57,9 @@ const moneyFormatter = new Intl.NumberFormat('pt-br', {
     currency: 'BRL',
 });
 
-const toMoneyFormat = (amount) => moneyFormatter.format(amount);
+const bigIntFormatter = new Intl.NumberFormat({ style: 'bigInt' });
 
-export { capitalize, ignoreAcentuation, toMoneyFormat, moneyFormatter };
+const toMoneyFormat = (amount) => moneyFormatter.format(amount);
+const toBigIntFormat = (number) => bigIntFormatter.format(number);
+
+export { capitalize, ignoreAcentuation, toRequestFormat, toMoneyFormat, moneyFormatter, toBigIntFormat };

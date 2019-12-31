@@ -7,7 +7,7 @@ import PieChart from '../pieChart';
 /* Config/Global */
 import theme from '../../global/styles/theme';
 /* Util */
-import { toMoneyFormat } from '../../util/stringHandler';
+import { toMoneyFormat, toBigIntFormat } from '../../util/stringHandler';
 /* Styled Components */
 import {
     SectionWrapper,
@@ -22,6 +22,7 @@ import {
     Source,
     CountyDescription
 } from './styles';
+import { Link } from 'react-router-dom';
 
 const PoliticSection = ({ data }) => {
 
@@ -54,7 +55,7 @@ const PoliticSection = ({ data }) => {
             <SectionRow>
                 <InfoWrapper>
                     <span>Eleitorado Total</span>
-                    <h3>{data?.amountVoters.amount}</h3>
+                    <h3>{toBigIntFormat(data?.amountVoters.amount)}</h3>
                 </InfoWrapper>
                 <InfoWrapper>
                     <span>Senso</span>
@@ -108,10 +109,17 @@ const PoliticSection = ({ data }) => {
             </SectionChartRow>
             <SectionRow direction='column'>
                 <Source>
-                    * Dados populacionais extraídos de <a target='_blank' href='https://cidades.ibge.gov.br'>cidades.ibge.gov.br</a>
+                    * Dados populacionais extraídos de <Link
+                        rel="noopener noreferrer"
+                        target='_blank'
+                        to='https://cidades.ibge.gov.br'>cidades.ibge.gov.br
+                        </Link>
                 </Source>
                 <Source>
-                    * Dados políticos extraídos de <a target='_blank' href='http://www.tse.jus.br/'>tse.jus.br</a>
+                    * Dados políticos extraídos de <Link
+                        rel="noopener noreferrer"
+                        target='_blank'
+                        to='http://www.tse.jus.br/'>tse.jus.br</Link>
                 </Source>
             </SectionRow>
         </SectionWrapper>
@@ -185,7 +193,10 @@ const EconomicSection = ({ data }) => {
             </SectionChartRow>
             <SectionRow direction='column'>
                 <Source>
-                    * Dados econômicos extraídos de <a target='_blank' href='https://cidades.ibge.gov.br'>cidades.ibge.gov.br</a>
+                    * Dados econômicos extraídos de <Link
+                        rel="noopener noreferrer"
+                        target='_blank'
+                        to='https://cidades.ibge.gov.br'>cidades.ibge.gov.br</Link>
                 </Source>
             </SectionRow>
         </SectionWrapper>
@@ -218,7 +229,7 @@ const CulturalSection = ({ data }) => {
                         : <span>Principais Pontos Turísticos</span>
                     }
                     {data?.touristSpots.map(touristSpot => (
-                        <LargeItem isLink key={touristSpot}>
+                        <LargeItem isLink key={touristSpot.name}>
                             <p>{touristSpot.name}</p>
                             <p>{touristSpot.adress}</p>
                         </LargeItem>
@@ -232,7 +243,7 @@ const CulturalSection = ({ data }) => {
                         : <span>Principais Eventos Culturais</span>
                     }
                     {data?.countyEvents.map(countyEvent => (
-                        <LargeItem isLink key={countyEvent}>
+                        <LargeItem isLink key={countyEvent.name}>
                             <p>{countyEvent.name}</p>
                             <p><span>Período: </span>{countyEvent.period}</p>
                         </LargeItem>
@@ -243,7 +254,7 @@ const CulturalSection = ({ data }) => {
                 <MultipleItensWrapper>
                     <span>Teatros / Escolas de Arte</span>
                     {data?.culturalPlaces.map(culturalPlace => (
-                        <LargeItem isLink key={culturalPlace}>
+                        <LargeItem isLink key={culturalPlace.name}>
                             <p>{culturalPlace.name}</p>
                             <p>{culturalPlace.adress}</p>
                         </LargeItem>
@@ -252,7 +263,10 @@ const CulturalSection = ({ data }) => {
             </SectionRow>
             <SectionRow direction='column'>
                 <Source>
-                    * Dados culturais extraídos de <a target='_blank' href='https://www.google.com/search?newwindow=1&sxsrf=ACYBGNS7JRzlATtvaddvKQsBIWke00FQAw%3A1576691575396&ei=d2f6Xb30F8G45OUPs7iBgAc&q=Natal+RN&oq=Natal+RN&gs_l=psy-ab.3..35i39j0l9.13083.14430..15538...0.2..0.155.446.0j3......0....1..gws-wiz.......0i71j0i67j0i131i67j0i131.rUiFfhgeYuQ&ved=0ahUKEwj9i5bq4b_mAhVBHLkGHTNcAHAQ4dUDCAs&uact=5'>Google</a>
+                    * Dados culturais extraídos de <Link
+                        rel="noopener noreferrer"
+                        target='_blank'
+                        to='https://www.google.com/search?newwindow=1&sxsrf=ACYBGNS7JRzlATtvaddvKQsBIWke00FQAw%3A1576691575396&ei=d2f6Xb30F8G45OUPs7iBgAc&q=Natal+RN&oq=Natal+RN&gs_l=psy-ab.3..35i39j0l9.13083.14430..15538...0.2..0.155.446.0j3......0....1..gws-wiz.......0i71j0i67j0i131i67j0i131.rUiFfhgeYuQ&ved=0ahUKEwj9i5bq4b_mAhVBHLkGHTNcAHAQ4dUDCAs&uact=5'>Google</Link>
                 </Source>
             </SectionRow>
         </SectionWrapper>

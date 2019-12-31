@@ -24,7 +24,7 @@ const Logo = styled.section`
 `;
 
 const HeaderOptions = styled.section`
-    display: flex;
+    display: ${({ isLoginPage }) => isLoginPage ? 'none' : 'flex'};
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;

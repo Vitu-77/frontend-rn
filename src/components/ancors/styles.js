@@ -8,25 +8,19 @@ const AncorsList = styled.nav`
     max-width: max-content;
 `;
 
-const Ancor = styled.a`
+const Ancor = styled.button`
+    background: transparent;
+    border: none;
     color: ${props => props.theme.secondaryGrey};
-    font-size: 14px;
+    font-size: 15px;
     text-decoration: none;
     transition: 300ms;
-    margin-left: 3px;
+    margin: 0 3px 0 0;
+    outline: none !important;
 
     &:hover{
         cursor: pointer;
         color: ${props => props.theme.primarySystemColor};
-    }
-
-    &:first-child{
-        margin: 0 !important;
-    }
-
-    &:last-child{
-        pointer-events: none !important;
-        color: ${props => props.theme.primaryGrey};
     }
 `;
 

@@ -5,12 +5,13 @@ const Btn = styled.button`
     border-radius: 4px;
     font-size: 15px;
     text-transform: uppercase;
-    padding: 12px 15px;
-    background: ${props => props.type === 'primary' ? props.theme.primarySystemColor : 'transparent'};
-    color: ${props => props.type === 'primary' ? props.theme.white : props.theme.primarySystemColor};
+    padding: ${props => props.padding || '12px 15px'};
+    background: ${props => props.btnType === 'primary' ? props.theme.primarySystemColor : 'transparent'};
+    color: ${props => props.btnType === 'primary' ? props.theme.white : props.theme.primarySystemColor};
     border: 2px solid ${props => props.theme.primarySystemColor};
     transition: 300ms;
     outline: 0;
+    grid-column: span ${props => props.span || 1};
 
     &:hover{
         background: ${props => props.theme.secondarySystemColor};

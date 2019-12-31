@@ -10,5 +10,5 @@ export default {
     blackOpacity1: 'rgba(0, 0, 0, .05)',
     blackOpacity2: 'rgba(0, 0, 0, .15)',
     blackOpacity3: 'rgba(0, 0, 0, .20)',
-    blackOpacity4: '#494980',
+    blackOpacity4: 'hsl(0,0%,80%)',
 }
