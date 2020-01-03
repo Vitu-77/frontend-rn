@@ -33,23 +33,23 @@ import {
 
 const County = () => {
 
-    const { countyName } = useParams();
+    const { county_name } = useParams();
     const [countyData, setCountyData] = useState(null);
 
     useEffect(() => {
         const fetch = async () => {
-            const { data } = await getCountyInfos(toRequestFormat(countyName));
+            const { data } = await getCountyInfos(toRequestFormat(county_name));
             await setCountyData(data);
         }
 
         setTimeout(() => {
             fetch();
         }, 1000);
-    }, [countyName, setCountyData]);
+    }, [county_name, setCountyData]);
 
     return (
         <Fragment>
-            <Head title={capitalize(`Nome do Sistema | ${countyName}`)} description='Descrição de Natal' />
+            <Head title={capitalize(`Nome do Sistema | ${county_name}`)} description='Descrição de Natal' />
             <Header />
             <Main>
                 <Suspense
@@ -115,9 +115,18 @@ const County = () => {
                                     'Dados Culturais'
                                 ]}
                                 panels={[
-                                    <PoliticSection data={countyData?.political} />,
-                                    <EconomicSection data={countyData?.economy} />,
-                                    <CulturalSection data={countyData?.cultural} />
+                                    <PoliticSection
+                                        countyName={countyData?.general?.countyName}
+                                        data={countyData?.political}
+                                    />,
+                                    <EconomicSection
+                                        countyName={countyData?.general?.countyName}
+                                        data={countyData?.economy}
+                                    />,
+                                    <CulturalSection
+                                        countyName={countyData?.general?.countyName}
+                                        data={countyData?.cultural}
+                                    />
                                 ]}
                             />
                         </ContainerBody>

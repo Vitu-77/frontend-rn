@@ -6,7 +6,7 @@ const Container = styled.div`
     left: 50%;
     transform: translateX(-50%);
 
-    z-index: 10000 !important;
+    z-index: 1000000 !important;
 
     @media(max-width: 515px){
         top: 12%;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-radius: ${props => props.roundBottom === 0 ? '8px' : '8px 8px 0 0'};
+    border-radius: ${props => props.roundBottom === 0 ? '6px' : '6px 6px 0 0'};
     box-shadow: 0px 0px 100px 10px rgba(52, 52, 168, 0.15);
     border-bottom: ${props => props.roundBottom === 0 ? 'none' : '1px solid #C4C4C4'};
     padding: 5px 0;

@@ -4,10 +4,10 @@ import { SelectWrapper, Label } from './styles';
 
 const SelectField = (props) => {
 
-    const { id, options, label, placeholder, defaultValue, handleChange, enabled = true, isSearchable = false } = props;
+    const { id, options, label, placeholder, defaultValue, handleChange, enabled = true, isSearchable = false, style } = props;
 
     return (
-        <SelectWrapper enabled={enabled}>
+        <SelectWrapper enabled={enabled} style={style}>
             <Select
                 theme={theme => ({
                     ...theme,

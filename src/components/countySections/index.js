@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PizzaChart from '../pizzaChart';
 import BarChart from '../barChart';
 import PieChart from '../pieChart';
+import SelectField from '../selectField';
 /* Config/Global */
 import theme from '../../global/styles/theme';
 /* Util */
@@ -14,17 +15,21 @@ import {
     SectionRow,
     SectionChartRow,
     ChartWrapper,
-    ChartTitle,
+    ChartWrapperHeader,
     InfoWrapper,
     MultipleItensWrapper,
     Item,
     LargeItem,
     Source,
-    CountyDescription
+    CountyDescription,
+    EditButton,
+    SeeAll
 } from './styles';
 import { Link } from 'react-router-dom';
 
-const PoliticSection = ({ data }) => {
+import { municipalYears } from '../../data/options';
+
+const PoliticSection = ({ data, countyName }) => {
 
     const [votersPerAge] = useState(data.votersPerAge);
     const [votersPerSex] = useState(data.votersPerSex);
@@ -64,7 +69,16 @@ const PoliticSection = ({ data }) => {
             </SectionRow>
             <SectionChartRow>
                 <ChartWrapper height={250} width={30}>
-                    <ChartTitle>Divisão por sexo</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Divisão por sexo</h3>
+                        <SelectField
+                            options={municipalYears}
+                            placeholder='Ano'
+                            label='Ano'
+                            style={{ width: '80px' }}
+                        />
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <PieChart
                         color={theme.ternarySystemColor}
                         data={votersPerSex}
@@ -72,7 +86,16 @@ const PoliticSection = ({ data }) => {
                     />
                 </ChartWrapper>
                 <ChartWrapper height={250} width={30}>
-                    <ChartTitle>Divisão por faixa etária</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Divisão por faixa etária</h3>
+                        <SelectField
+                            options={municipalYears}
+                            placeholder='Ano'
+                            label='Ano'
+                            style={{ width: '80px' }}
+                        />
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <PizzaChart
                         color={theme.ternarySystemColor}
                         hoverColor={theme.lastSystemColor}
@@ -81,7 +104,16 @@ const PoliticSection = ({ data }) => {
                     />
                 </ChartWrapper>
                 <ChartWrapper height={250} width={30}>
-                    <ChartTitle>Divisão por nível de escolaridade</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Divisão por nível de escolaridade</h3>
+                        <SelectField
+                            options={municipalYears}
+                            placeholder='Ano'
+                            label='Ano'
+                            style={{ width: '80px' }}
+                        />
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <PieChart
                         color={theme.ternarySystemColor}
                         data={votersPerSchooling}
@@ -91,7 +123,10 @@ const PoliticSection = ({ data }) => {
             </SectionChartRow>
             <SectionChartRow>
                 <ChartWrapper height={350}>
-                    <ChartTitle>Eleitorado nas últimas 5 eleições (Municipal)</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Eleitorado nas últimas 5 eleições (Municipal)</h3>
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={votersAmountMunicipal}
@@ -99,7 +134,10 @@ const PoliticSection = ({ data }) => {
                     />
                 </ChartWrapper>
                 <ChartWrapper height={350}>
-                    <ChartTitle>Eleitorado nas últimas 5 eleições (Federal)</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Eleitorado nas últimas 5 eleições (Federal)</h3>
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={votersAmountFederal}
@@ -126,7 +164,7 @@ const PoliticSection = ({ data }) => {
     )
 }
 
-const EconomicSection = ({ data }) => {
+const EconomicSection = ({ data, countyName }) => {
 
     const [lastAnnualBillings] = useState(data?.lastAnnualBillings);
     const [lastPibs] = useState(data?.lastPibs);
@@ -154,7 +192,10 @@ const EconomicSection = ({ data }) => {
                         : <span>Principais fontes de renda do município</span>
                     }
                     {data.mainIncomeSources.map(incomeSource => (
-                        <Item key={incomeSource}>
+                        <Item
+                            isLink
+                            href={`/county/${countyName.toLowerCase()}/income_sources/1`} // tornar isso dinamico futuramente
+                            key={incomeSource}>
                             {incomeSource}
                         </Item>
                     ))}
@@ -173,7 +214,10 @@ const EconomicSection = ({ data }) => {
             </SectionRow>
             <SectionChartRow>
                 <ChartWrapper height={350} className='barChart'>
-                    <ChartTitle>Receita orçamentária nos últimos 5 anos</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Receita orçamentária nos últimos 5 anos</h3>
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={lastAnnualBillings}
@@ -182,7 +226,10 @@ const EconomicSection = ({ data }) => {
                     />
                 </ChartWrapper>
                 <ChartWrapper height={350} className='barChart'>
-                    <ChartTitle>Pib per capta nos últimos 5 anos</ChartTitle>
+                    <ChartWrapperHeader>
+                        <h3>Pib per capta nos últimos 5 anos</h3>
+                        <EditButton>Editar</EditButton>
+                    </ChartWrapperHeader>
                     <BarChart
                         color={theme.secondarySystemColor}
                         data={lastPibs}
@@ -203,12 +250,12 @@ const EconomicSection = ({ data }) => {
     )
 }
 
-const CulturalSection = ({ data }) => {
+const CulturalSection = ({ data, countyName }) => {
     return (
         <SectionWrapper>
             <SectionRow>
                 <CountyDescription>
-                    <h4>Descição do Município</h4>
+                    <h4>Descrição do Município</h4>
                     <p>{data?.countyDescription}</p>
                 </CountyDescription>
             </SectionRow>
@@ -234,6 +281,11 @@ const CulturalSection = ({ data }) => {
                             <p>{touristSpot.adress}</p>
                         </LargeItem>
                     ))}
+                    <SeeAll>
+                        <Link to={`/county/${countyName.toLowerCase()}/touristic_spots`}>
+                            Ver Todos
+                        </Link>
+                    </SeeAll>
                 </MultipleItensWrapper>
             </SectionRow>
             <SectionRow>
@@ -248,6 +300,12 @@ const CulturalSection = ({ data }) => {
                             <p><span>Período: </span>{countyEvent.period}</p>
                         </LargeItem>
                     ))}
+                    {/* colocar link para a página que exibe todos os Eventos Culturais */}
+                    <SeeAll>
+                        <Link to={`/county/${countyName.toLowerCase()}/touristic_spots`}>
+                            Ver Todos
+                        </Link>
+                    </SeeAll>
                 </MultipleItensWrapper>
             </SectionRow>
             <SectionRow>
@@ -259,6 +317,12 @@ const CulturalSection = ({ data }) => {
                             <p>{culturalPlace.adress}</p>
                         </LargeItem>
                     ))}
+                     {/* colocar link para a página que exibe todos os Locais Artisticos */}
+                     <SeeAll>
+                        <Link to={`/county/${countyName.toLowerCase()}/touristic_spots`}>
+                            Ver Todos
+                        </Link>
+                    </SeeAll>
                 </MultipleItensWrapper>
             </SectionRow>
             <SectionRow direction='column'>

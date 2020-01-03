@@ -50,10 +50,11 @@ const ChartWrapper = styled.div`
     height: ${props => props.height}px;
     width: ${props => props.width}%;
     position: relative;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex: 1;
     border-radius: 4px;
     transition: 300ms;
@@ -67,17 +68,49 @@ const ChartWrapper = styled.div`
     }
 `;
 
-const ChartTitle = styled.h3`
-    font-size: 14px;
-    font-weight: 300;
-    position: absolute;
-    color: ${props => props.theme.secondaryGrey};
+const ChartWrapperHeader = styled.div`
+
+    padding: 2%;
     width: 100%;
-    text-align: ${props => props.align || 'start'};
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
     top: 0;
-    padding: 2% 0 0 2%;
+    left: 0;
+    border-bottom: 1px solid ${props => props.theme.blackOpacity1};
+
+    h3{
+        font-size: 14px;
+        font-weight: 300;
+        color: ${props => props.theme.secondaryGrey};
+        text-align: ${props => props.align || 'start'};
+        text-transform: uppercase;
+        transition: 300ms;
+        margin-bottom: 15px;
+    }
+`;
+
+const EditButton = styled.button`
+    position: absolute;
+    top: 60%;
+    left: 1%;
+    align-self: flex-start;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    color: ${({ theme }) => theme.secondarySystemColor};
+    border-radius: 2px;
+    padding: 2px 4px;
+    text-transform: uppercase;
+    cursor: pointer !important;
     transition: 300ms;
+    z-index: 100000000000;
+
+    &:hover{
+        color: ${({ theme }) => theme.primaryGrey};
+        background: ${({ theme }) => theme.blackOpacity1};
+    }
 `;
 
 const InfoWrapper = styled.article`
@@ -109,10 +142,6 @@ const InfoWrapper = styled.article`
 const MultipleItensWrapper = styled.article`
     width: 100%;
     position: relative;
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; */
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-flow: row;
@@ -152,7 +181,6 @@ const Item = styled.a`
         color: ${props => props.isLink ? props.theme.secondarySystemColor : props.theme.primaryGrey};
     }
 `;
-
 
 const LargeItem = styled.a`
     pointer-events: ${props => props.isLink ? 'all' : 'visible'};
@@ -251,17 +279,36 @@ const CountyDescription = styled.article`
     }
 `;
 
+const SeeAll = styled.div`
+    grid-column: span 4;
+    /* grid-row-start: 2; */
+    background: transparent;
+    /* border: none; */
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    a{
+        color: ${({ theme }) => theme.secondarySystemColor};
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+`;
+
 export {
     SectionWrapper,
     SubSectionTitle,
     SectionRow,
     SectionChartRow,
     ChartWrapper,
-    ChartTitle,
+    ChartWrapperHeader,
     InfoWrapper,
     MultipleItensWrapper,
     Item,
     LargeItem,
     Source,
-    CountyDescription
+    CountyDescription,
+    EditButton,
+    SeeAll
 }

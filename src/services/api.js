@@ -52,4 +52,26 @@ const getCountyInfos = async (countyName) => {
     return response;
 }
 
-export { getCountyInfos, authenticate, isAuthenticated }
+/* ---- Touristic Spots ---- */
+const getTouristicSpots = async (countyId) => {
+    const touristicSpots = await api.get(`/county/${countyId}/touristic_spots`);
+    return touristicSpots;
+}
+
+const getTouristicSpot = async (countyId, touristicSpotId) => {
+    const touristicSpot = await api.get(`/county/${countyId}/touristic_spots/${touristicSpotId}`);
+    return touristicSpot;
+}
+
+const postTouristicSpot = async (countyId, touristicSpots) => {
+    await api.post(`/county/${countyId}/touristic_spots`, { touristicSpots });
+}
+
+export {
+    authenticate,
+    isAuthenticated,
+    getCountyInfos,
+    getTouristicSpots,
+    getTouristicSpot,
+    postTouristicSpot
+}

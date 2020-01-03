@@ -50,4 +50,15 @@ const InnerWrapper = styled.div`
     }
 `;
 
-export { Wrapper, InnerWrapper, Content, Image }
+const Link = styled.a`
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover{
+        div > p:first-child {
+            color: ${({ theme }) => theme.secondarySystemColor} !important;
+        }
+    }
+`;
+
+export { Wrapper, InnerWrapper, Content, Image, Link }
