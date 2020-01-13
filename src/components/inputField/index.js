@@ -14,6 +14,7 @@ const InputField = (props) => {
                 value={value}
                 onChange={handleChange}
                 type={type}
+                autoComplete='off'
             />
         </InputWrapper>
     )

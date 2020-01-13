@@ -53,18 +53,18 @@ const getCountyInfos = async (countyName) => {
 }
 
 /* ---- Touristic Spots ---- */
-const getTouristicSpots = async (countyId) => {
-    const touristicSpots = await api.get(`/county/${countyId}/touristic_spots`);
+const getTouristicSpots = async (countyId, limit = 0) => {
+    const touristicSpots = await api.get(`/touristic_spots?county_id=${countyId}&limit=${limit}`);
     return touristicSpots;
 }
 
-const getTouristicSpot = async (countyId, touristicSpotId) => {
-    const touristicSpot = await api.get(`/county/${countyId}/touristic_spots/${touristicSpotId}`);
+const getTouristicSpot = async (touristicSpotId) => {
+    const touristicSpot = await api.get(`/touristic_spot?id=${touristicSpotId}`);
     return touristicSpot;
 }
 
-const postTouristicSpot = async (countyId, touristicSpots) => {
-    await api.post(`/county/${countyId}/touristic_spots`, { touristicSpots });
+const postTouristicSpot = async (touristicSpots) => {
+    await api.post(`/touristic_spots`, { touristicSpots });
 }
 
 export {

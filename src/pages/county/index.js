@@ -20,6 +20,7 @@ import theme from '../../global/styles/theme';
 import { PoliticSection, EconomicSection, CulturalSection } from '../../components/countySections';
 /* Util */
 import { capitalize, toRequestFormat } from '../../util/stringHandler';
+import { redirectTo } from '../../util/navigation';
 /* Styled Components */
 import {
     Main,
@@ -42,9 +43,7 @@ const County = () => {
             await setCountyData(data);
         }
 
-        setTimeout(() => {
-            fetch();
-        }, 1000);
+        setTimeout(() => fetch(), 500);
     }, [county_name, setCountyData]);
 
     return (
@@ -68,9 +67,13 @@ const County = () => {
                                     countyName={countyData?.general?.countyName}
                                     isCapital={countyData?.general?.isStateCapital}
                                 />
-                                <PrimaryButton content='Editar Município' handleClick={() => {
-                                    console.log(countyData);
-                                }} />
+                                <PrimaryButton
+                                    content='Georreferenciamento'
+                                    handleClick={() => {
+                                        return redirectTo('http://localhost:5501', 'external')
+                                    }}
+                                    disabled={county_name !== 'mossoró'}
+                                />
                             </HeaderRow>
                             <HeaderRow>
                                 <GeneralInfos>

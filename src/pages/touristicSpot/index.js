@@ -24,16 +24,15 @@ const TouristicSpot = () => {
     const { county_name, touristic_spot_id } = useParams();
 
     const [touristicSpot, setTouristicSpot] = useState(null);
-    const [countyId] = useState(1); // isso deve ser colocado no context de county
 
     useEffect(() => {
         const fetch = async () => {
-            const { data } = await getTouristicSpot(countyId, touristic_spot_id);
+            const { data } = await getTouristicSpot(touristic_spot_id);
             setTouristicSpot(data.touristicSpot);
         }
 
-        fetch();
-    }, [countyId, touristic_spot_id]);
+        setTimeout(() => fetch(), 500);
+    }, [touristic_spot_id]);
 
     return (
         <React.Fragment>

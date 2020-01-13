@@ -34,6 +34,7 @@ const TouristicSpots = () => {
 
     const handleAddTouristicSpot = async () => {
         const newTouristicSpot = {
+            county_id: countyId,
             name: document.querySelector('#new-name').value,
             adress: document.querySelector('#new-adress').value,
             description: document.querySelector('#new-description').value,
@@ -41,12 +42,13 @@ const TouristicSpots = () => {
 
         setTouristicSpots([...touristicSpots, newTouristicSpot]);
         setShowForm(false);
+
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => input.value = '');
 
-        const requestArray = [newTouristicSpot];
+        const requestArray = [newTouristicSpot]; // reqs devem ir no formato de array para o back
 
-        return await postTouristicSpot(countyId, requestArray);
+        return await postTouristicSpot(requestArray);
     }
 
     useEffect(() => {
@@ -55,8 +57,7 @@ const TouristicSpots = () => {
             setTouristicSpots(data.touristicSpots);
         }
 
-        fetch();
-
+        setTimeout(() => fetch(), 500);
     }, [countyId]);
 
     return (

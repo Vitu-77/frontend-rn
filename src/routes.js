@@ -8,6 +8,7 @@ import AddCountyInfos from './pages/addCountyInfos';
 import IncomeSource from './pages/incomeSource';
 import TouristicSpot from './pages/touristicSpot';
 import TouristicSpots from './pages/touristicSpots';
+import NoMatch from './pages/noMatch';
 
 const Routes = () => {
 
@@ -34,6 +35,9 @@ const Routes = () => {
                 </Route>
                 <Route exact path='/county/:county_name/touristic_spots'>
                     <TouristicSpots />
+                </Route>
+                <Route path='*'>
+                    <NoMatch />
                 </Route>
             </Switch>
         </Router >

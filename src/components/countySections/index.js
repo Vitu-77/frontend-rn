@@ -276,7 +276,10 @@ const CulturalSection = ({ data, countyName }) => {
                         : <span>Principais Pontos Turísticos</span>
                     }
                     {data?.touristSpots.map(touristSpot => (
-                        <LargeItem isLink key={touristSpot.name}>
+                        <LargeItem 
+                        href={`/county/${countyName}/touristic_spots/1`} // tornar isso dinamico
+                        isLink 
+                        key={touristSpot.name}>
                             <p>{touristSpot.name}</p>
                             <p>{touristSpot.adress}</p>
                         </LargeItem>

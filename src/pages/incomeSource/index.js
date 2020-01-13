@@ -43,21 +43,21 @@ const IncomeSource = () => {
                         <SectionRow>
                             <KeyVal>
                                 <Key>Renda total gerada por esse setor</Key>
-                                <Value>-- API --</Value>
+                                <Value>R$ 32.128,00</Value>
                             </KeyVal>
                             <KeyVal>
                                 <Key>Faixa Etária Média dos Empregados Nesse Setor</Key>
-                                <Value>-- API --</Value>
+                                <Value>25</Value>
                             </KeyVal>
                         </SectionRow>
                         <SectionRow>
                             <KeyVal>
                                 <Key>Empregos diretos gerados por esse setor</Key>
-                                <Value>-- API --</Value>
+                                <Value>100.000</Value>
                             </KeyVal>
                             <KeyVal>
                                 <Key>Empregos indiretos gerados por esse setor</Key>
-                                <Value>-- API --</Value>
+                                <Value>40.000</Value>
                             </KeyVal>
                         </SectionRow>
                     </ContentBody>

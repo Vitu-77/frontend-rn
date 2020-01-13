@@ -48,7 +48,8 @@ const ignoreAcentuation = (str) => {
 const toRequestFormat = (str) => {
     str = ignoreAcentuation(str);
     str = str.replace(/[- ]/g, '_');
-
+    str = str.trim();
+    
     return str;
 }
 
